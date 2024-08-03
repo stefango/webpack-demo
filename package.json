@@ -1,0 +1,16 @@
+{
+  "scripts": {
+    "start": "",
+    "build": "webpack --config=build/webpack.config.js",
+    "serve": "serve dist"
+  },
+  "devDependencies": {
+    "prettier": "^3.3.3",
+    "serve": "^14.2.3",
+    "webpack": "^5.93.0",
+    "webpack-cli": "^5.1.4"
+  },
+  "dependencies": {
+    "lodash-es": "^4.17.21"
+  }
+}
