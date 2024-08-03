@@ -5,7 +5,5 @@ module.exports = {
   output: {
     filename: 'main.js',
     path: path.resolve(__dirname, '../dist'),
-    // Tweak this to match your GitHub project name
-    publicPath: '/webpack-demo/',
   },
 };
