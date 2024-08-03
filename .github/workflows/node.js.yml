@@ -5,13 +5,12 @@ name: Node.js CI
 
 on:
   push:
-    branches: [ "main" ]
+    branches: ['main']
   pull_request:
-    branches: [ "main" ]
+    branches: ['main']
 
 jobs:
-  build:
-
+  build-and-deploy:
     runs-on: ubuntu-latest
 
     strategy:
@@ -20,27 +19,43 @@ jobs:
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
         pnpm-version: [8.x]
 
+    # Grant GITHUB_TOKEN the permissions required to make a Pages deployment
+    permissions:
+      pages: write # to deploy to Pages
+      id-token: write # to verify the deployment originates from an appropriate source
+
+    # Deploy to the github-pages environment
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
     steps:
-    - uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-    - name: Setup pnpm
-      uses: pnpm/action-setup@v4.0.0
-      with:
-        # Version of pnpm to install
-        version: ${{ matrix.pnpm-version }}
-        
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v4
-      with:
-        node-version: ${{ matrix.node-version }}
-        cache: 'pnpm'
-    - run: pnpm i
-    - run: pnpm build
-    - run: pnpm test --if-present
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4.0.0
+        with:
+          # Version of pnpm to install
+          version: ${{ matrix.pnpm-version }}
 
-    - name: Deploy with gh-pages
-      run: |
-       git remote set-url origin https://git:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git
-       pnpm run deploy -- -u "github-actions-bot <support+actions@github.com>"
-      env:
-       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'pnpm'
+      - run: pnpm i
+      - run: pnpm build
+      - run: pnpm test --if-present
+
+      - name: Upload pages artifact
+        id: upload-pages-artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
+        with:
+          folder: .
+#      - run: pnpm run deploy
