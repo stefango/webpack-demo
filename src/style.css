@@ -1,0 +1,12 @@
+@font-face {
+  font-family: 'MyFont';
+  src: url('./Roboto-Thin.ttf');
+  font-weight: 600;
+  font-style: normal;
+}
+
+.hello {
+  color: green;
+  font-family: 'MyFont';
+  background: url('./icon.png') no-repeat;
+}
