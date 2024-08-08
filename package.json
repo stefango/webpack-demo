@@ -6,10 +6,10 @@
     "name": "stefango"
   },
   "scripts": {
-    "start": "",
+    "start": "webpack serve --config=build/webpack.config.js",
     "build": "webpack --config=build/webpack.config.js",
-    "build-watch": "webpack --config=build/webpack.config.js --watch",
-    "serve": "serve dist"
+    "watch": "webpack --config=build/webpack.config.js --watch",
+    "serve": "pnpm build && serve dist -n"
   },
   "devDependencies": {
     "css-loader": "^7.1.2",
@@ -19,6 +19,8 @@
     "style-loader": "^4.0.0",
     "webpack": "^5.93.0",
     "webpack-cli": "^5.1.4",
+    "webpack-dev-middleware": "^7.3.0",
+    "webpack-dev-server": "^5.0.4",
     "yamljs": "^0.3.0"
   },
   "dependencies": {

@@ -3,9 +3,17 @@ const yaml = require('yamljs');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
+  mode: 'development',
   entry: {
     index: './src/index.js',
     print: './src/print.js',
+  },
+  // devtool: 'inline-source-map',
+  devServer: {
+    client: {
+      overlay: true,
+    },
+    static: './dist',
   },
   output: {
     filename: '[name].bundle.js',
@@ -40,4 +48,8 @@ module.exports = {
       title: 'Output Management',
     }),
   ],
+  optimization: {
+    // https://bundlers.tooling.report/code-splitting/multi-entry/
+    runtimeChunk: 'single',
+  },
 };
