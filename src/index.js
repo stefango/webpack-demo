@@ -3,7 +3,9 @@ import './style.css';
 import Icon from './icon.png';
 import yaml from './data.yaml';
 import printMe from './print.js';
-
+import { createRoot } from 'react-dom/client';
+import React from 'react'
+import { Index } from './pages';
 console.log(yaml.title); // output `YAML Example`
 console.log(yaml.owner.name); // output `Tom Preston-Werner`
 
@@ -28,4 +30,10 @@ function component() {
   return element;
 }
 
+function reactComponent() {
+  document.body.innerHTML = '<div id="app"></div>';
+  const root = createRoot(document.getElementById('app'));
+  root.render(<Index />);
+}
+reactComponent()
 document.body.appendChild(component());
