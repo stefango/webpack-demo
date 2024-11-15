@@ -2,6 +2,7 @@ const path = require('path');
 const yaml = require('yamljs');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
+
 const isDevelopment = process.env.NODE_ENV === 'development';
 
 module.exports = {
@@ -50,12 +51,12 @@ module.exports = {
                 auto: true,
                 namedExport: false,
                 exportLocalsConvention: 'camelCase',
-                localIdentName: '[path][name]__[local]--[hash:base64:5]'
-              }
-            }
+                localIdentName: '[path][name]__[local]--[hash:base64:5]',
+              },
+            },
           },
-          'sass-loader'
-        ]
+          'sass-loader',
+        ],
       },
       {
         test: /\.(png|svg|jpg|jpeg|gif)$/i,
@@ -78,7 +79,7 @@ module.exports = {
     new HtmlWebpackPlugin({
       title: 'Output Management',
     }),
-    isDevelopment && new ReactRefreshWebpackPlugin({overlay: false}),
+    isDevelopment && new ReactRefreshWebpackPlugin({ overlay: false }),
   ].filter(Boolean),
   optimization: {
     // https://bundlers.tooling.report/code-splitting/multi-entry/
