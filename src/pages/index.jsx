@@ -1,5 +1,14 @@
 import styles from './index.module.scss';
+import { useState } from 'react';
 
 export function Index() {
-  return <div className={styles.moduleTest}>react app</div>;
+  const [count, setCount] = useState(0);
+
+  return (
+    <>
+      <div className={styles.moduleTest}>react app</div>
+      <button onClick={() => setCount(count + 1)}>+</button>
+      <div>Count: {count}</div>
+    </>
+  );
 }

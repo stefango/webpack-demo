@@ -23,9 +23,6 @@ module.exports = {
   },
   // devtool: 'inline-source-map',
   devServer: {
-    client: {
-      overlay: true,
-    },
     static: './dist',
   },
   output: {
