@@ -8,8 +8,15 @@ const isDevelopment = process.env.NODE_ENV === 'development';
 module.exports = {
   mode: 'development',
   entry: {
-    index: './src/index.js',
-    print: './src/print.js',
+    index: {
+      import: './src/index.js',
+      dependOn: 'shared',
+    },
+    print: {
+      import: './src/print.js',
+      dependOn: 'shared',
+    },
+    shared: 'lodash-es',
   },
   resolve: {
     extensions: ['.ts', '.tsx', '.js', '.jsx'],
@@ -84,5 +91,8 @@ module.exports = {
   optimization: {
     // https://bundlers.tooling.report/code-splitting/multi-entry/
     runtimeChunk: 'single',
+    splitChunks: {
+      chunks: 'all',
+    },
   },
 };
