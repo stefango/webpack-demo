@@ -1,9 +1,10 @@
-import react from 'eslint-plugin-react';
-import reactHooks from 'eslint-plugin-react-hooks';
 import eslint from '@eslint/js';
 import importPlugin from 'eslint-plugin-import';
-import tsEslint from 'typescript-eslint';
+import react from 'eslint-plugin-react';
+import reactHooks from 'eslint-plugin-react-hooks';
+import sort from 'eslint-plugin-sort';
 import globals from 'globals';
+import tsEslint from 'typescript-eslint';
 
 export default tsEslint.config(
   {
@@ -13,6 +14,7 @@ export default tsEslint.config(
   eslint.configs.recommended,
   tsEslint.configs.strict,
   tsEslint.configs.stylistic,
+  sort.configs['flat/recommended'],
   {
     languageOptions: {
       globals: {
@@ -34,15 +36,15 @@ export default tsEslint.config(
     },
     rules: {
       ...reactHooks.configs.recommended.rules,
-      'no-unused-vars': 'warn',
+      '@typescript-eslint/no-explicit-any': 'off',
+      'global-require': 'off',
+      'import/prefer-default-export': 'off',
+      'no-console': 'off',
       'no-undef': 'warn',
+      'no-unused-vars': 'warn',
+      'react/jsx-boolean-value': ['warn', 'never'],
       'react/jsx-curly-brace-presence': ['warn', { props: 'never' }],
       'react/react-in-jsx-scope': 'off',
-      'react/jsx-boolean-value': ['warn', 'never'],
-      'import/prefer-default-export': 'off',
-      'global-require': 'off',
-      'no-console': 'off',
-      '@typescript-eslint/no-explicit-any': 'off',
     },
     // settings: {
     //   'import/resolver': {

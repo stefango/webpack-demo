@@ -1,5 +1,5 @@
+import { ClassComponent, Footer, FunctionComponent } from '../components';
 import styles from './index.module.scss';
-import { Footer, ClassComponent, FunctionComponent } from '../components';
 
 export function Index() {
   return (
