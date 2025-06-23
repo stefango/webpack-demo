@@ -42,6 +42,7 @@ export default tsEslint.config(
       'import/prefer-default-export': 'off',
       'global-require': 'off',
       'no-console': 'off',
+      '@typescript-eslint/no-explicit-any': 'off',
     },
     // settings: {
     //   'import/resolver': {
