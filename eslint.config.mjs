@@ -38,6 +38,7 @@ export default tsEslint.config(
       'no-undef': 'warn',
       'react/jsx-curly-brace-presence': ['warn', { props: 'never' }],
       'react/react-in-jsx-scope': 'off',
+      'react/jsx-boolean-value': ['warn', 'never'],
       'import/prefer-default-export': 'off',
       'global-require': 'off',
       'no-console': 'off',
