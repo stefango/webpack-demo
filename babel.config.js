@@ -1,6 +1,9 @@
 const isDevelopment = process.env.NODE_ENV === 'development';
 
 module.exports = {
+  plugins: [isDevelopment && require.resolve('react-refresh/babel')].filter(
+    Boolean,
+  ),
   presets: [
     '@babel/preset-env',
     [
@@ -11,7 +14,4 @@ module.exports = {
     ],
     '@babel/preset-typescript',
   ],
-  plugins: [isDevelopment && require.resolve('react-refresh/babel')].filter(
-    Boolean,
-  ),
 };

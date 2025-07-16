@@ -6,35 +6,27 @@ const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin'
 const isDevelopment = process.env.NODE_ENV === 'development';
 
 module.exports = {
-  mode: 'development',
-  entry: {
-    index: {
-      import: './src/index.js',
-      dependOn: 'shared',
-    },
-    print: {
-      import: './src/print.js',
-      dependOn: 'shared',
-    },
-    shared: 'lodash-es',
-  },
-  resolve: {
-    extensions: ['.ts', '.tsx', '.js', '.jsx'],
-  },
   // devtool: 'inline-source-map',
   devServer: {
     static: './dist',
   },
-  output: {
-    filename: '[name].bundle.js',
-    path: path.resolve(__dirname, '../dist'),
-    clean: true,
+  entry: {
+    index: {
+      dependOn: 'shared',
+      import: './src/index.js',
+    },
+    print: {
+      dependOn: 'shared',
+      import: './src/print.js',
+    },
+    shared: 'lodash-es',
   },
+  mode: 'development',
   module: {
     rules: [
       {
-        test: /\.(ts|js)x?$/,
         exclude: /node_modules/,
+        test: /\.(ts|js)x?$/,
         use: {
           loader: 'babel-loader',
           options: require('../babel.config'),
@@ -53,9 +45,9 @@ module.exports = {
             options: {
               modules: {
                 auto: true,
-                namedExport: false,
                 exportLocalsConvention: 'camelCase',
                 localIdentName: '[path][name]__[local]--[hash:base64:5]',
+                namedExport: false,
               },
             },
           },
@@ -71,13 +63,25 @@ module.exports = {
         type: 'asset/resource',
       },
       {
-        test: /\.yaml$/i,
-        type: 'json',
         parser: {
           parse: yaml.parse,
         },
+        test: /\.yaml$/i,
+        type: 'json',
       },
     ],
+  },
+  optimization: {
+    // https://bundlers.tooling.report/code-splitting/multi-entry/
+    runtimeChunk: 'single',
+    splitChunks: {
+      chunks: 'all',
+    },
+  },
+  output: {
+    clean: true,
+    filename: '[name].bundle.js',
+    path: path.resolve(__dirname, '../dist'),
   },
   plugins: [
     new HtmlWebpackPlugin({
@@ -85,11 +89,7 @@ module.exports = {
     }),
     isDevelopment && new ReactRefreshWebpackPlugin({ overlay: false }),
   ].filter(Boolean),
-  optimization: {
-    // https://bundlers.tooling.report/code-splitting/multi-entry/
-    runtimeChunk: 'single',
-    splitChunks: {
-      chunks: 'all',
-    },
+  resolve: {
+    extensions: ['.ts', '.tsx', '.js', '.jsx'],
   },
 };

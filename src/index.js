@@ -1,12 +1,11 @@
-import { join } from 'lodash-es';
 import './style.css';
-import { createRoot } from 'react-dom/client';
+import { join } from 'lodash-es';
 import React from 'react';
-import Icon from './icon.png';
+import { createRoot } from 'react-dom/client';
 import yaml from './data.yaml';
-import printMe from './print';
-
+import Icon from './icon.png';
 import { Index } from './pages';
+import printMe from './print';
 
 console.log(yaml.title); // output `YAML Example`
 console.log(yaml.owner.name); // output `Tom Preston-Werner`
